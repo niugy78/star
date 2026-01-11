@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我们的纪念日 | 在一起的每一天</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        // 配置 Tailwind CSS
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        love: {
+                            50: '#FFF5F7',
+                            100: '#FFE6EB',
+                            200: '#FFC7D1',
+                            300: '#FFA8B9',
+                            400: '#FF89A2',
+                            500: '#FF6A8B',
+                            600: '#FF4B6F',
+                            700: '#FF2C53',
+                            800: '#FF0D37',
+                            900: '#E60029',
+                        }
+                    },
+                    fontFamily: {
+                        romantic: ['"Noto Serif SC"', 'serif'],
+                        cute: ['"Comic Sans MS"', 'cursive']
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-shadow {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            }
+            .text-shadow-lg {
+                text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+            }
+            .bg-blur {
+                backdrop-filter: blur(8px);
+            }
+            .transition-all-300 {
+                transition: all 0.3s ease;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-4 overflow-x-hidden">
+    <!-- 背景图片容器 -->
+    <div id="background-container" class="fixed inset-0 z-0 transition-all duration-1000 ease-in-out">
+        <img id="background-image" src="https://picsum.photos/id/1035/1920/1080" alt="背景图片" class="w-full h-full object-cover">
+        <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+    </div>
+
+    <!-- 主要内容 -->
+    <div class="relative z-10 text-center max-w-4xl w-full">
+        <!-- 标题部分 -->
+        <header class="mb-12">
+            <h1 class="text-[clamp(2.5rem,8vw,4.5rem)] font-romantic font-bold text-white text-shadow-lg mb-4 animate-[fadeInDown_1s_ease-out]">
+                唐季亮和周星玲在一起的第
+            </h1>
+            <div id="days-counter" class="text-[clamp(3rem,10vw,5rem)] font-bold text-love-200 text-shadow-lg animate-[fadeIn_1.5s_ease-out]">
+                0
+            </div>
+            <p class="text-[clamp(1.2rem,4vw,1.8rem)] font-romantic text-white text-shadow mt-4 animate-[fadeInUp_1.2s_ease-out]">
+                天
+            </p>
+        </header>
+
+        <!-- 详细信息卡片 -->
+        <div class="bg-white bg-opacity-20 bg-blur rounded-2xl p-6 md:p-8 backdrop-filter backdrop-blur-lg border border-white border-opacity-30 shadow-xl mb-10 animate-[fadeIn_1.8s_ease-out]">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white bg-opacity-30 rounded-xl p-4 hover:bg-opacity-40 transition-all-300">
+                    <h3 class="text-lg font-medium text-white mb-2">开始日期</h3>
+                    <p class="text-2xl font-bold text-love-200">2025.06.03</p>
+                </div>
+                <div class="bg-white bg-opacity-30 rounded-xl p-4 hover:bg-opacity-40 transition-all-300">
+                    <h3 class="text-lg font-medium text-white mb-2">在一起的周数</h3>
+                    <p id="weeks-counter" class="text-2xl font-bold text-love-200">0</p>
+                </div>
+                <div class="bg-white bg-opacity-30 rounded-xl p-4 hover:bg-opacity-40 transition-all-300">
+                    <h3 class="text-lg font-medium text-white mb-2">在一起的月数</h3>
+                    <p id="months-counter" class="text-2xl font-bold text-love-200">0</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 爱情宣言 -->
+        <div class="bg-white bg-opacity-20 bg-blur rounded-2xl p-6 md:p-8 backdrop-filter backdrop-blur-lg border border-white border-opacity-30 shadow-xl mb-10 animate-[fadeIn_2s_ease-out]">
+            <h2 class="text-2xl font-romantic font-bold text-white text-shadow mb-4">爱情宣言</h2>
+            <p class="text-lg text-white italic">
+                "从相遇的那一刻起，每一个平凡的日子都变成了美好的回忆。<br>
+                愿我们的爱情如星辰般永恒，如流水般绵长。<br>
+                每一天都是新的开始，每一刻都是珍贵的时光。"
+            </p>
+        </div>
+
+        <!-- 背景图片切换 -->
+        <div class="bg-white bg-opacity-20 bg-blur rounded-2xl p-6 backdrop-filter backdrop-blur-lg border border-white border-opacity-30 shadow-xl mb-10 animate-[fadeIn_2.2s_ease-out]">
+            <h2 class="text-2xl font-romantic font-bold text-white text-shadow mb-6">更换背景</h2>
+            
+            <!-- 自定义图片上传 -->
+            <div class="mb-8">
+                <label class="block text-lg font-medium text-white mb-3">上传自定义背景</label>
+                <div class="flex flex-col items-center">
+                    <label for="custom-bg" class="bg-white bg-opacity-30 hover:bg-opacity-40 text-white font-bold py-3 px-6 rounded-full shadow-lg transition-all-300 transform hover:scale-105 cursor-pointer w-full max-w-xs text-center">
+                        <i class="fa fa-upload mr-2"></i> 选择图片
+                        <input type="file" id="custom-bg" accept="image/*" class="hidden">
+                    </label>
+                    <p class="text-sm text-white text-opacity-80 mt-2">支持 JPG、PNG、WEBP 格式</p>
+                </div>
+            </div>
+            
+            <!-- 预设背景图片 -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="bg-cover bg-center h-24 rounded-lg cursor-pointer hover:ring-2 hover:ring-love-400 transition-all-300" 
+                     data-bg="https://picsum.photos/id/1035/1920/1080"></div>
+                <div class="bg-cover bg-center h-24 rounded-lg cursor-pointer hover:ring-2 hover:ring-love-400 transition-all-300" 
+                     data-bg="https://picsum.photos/id/1062/1920/1080"></div>
+                <div class="bg-cover bg-center h-24 rounded-lg cursor-pointer hover:ring-2 hover:ring-love-400 transition-all-300" 
+                     data-bg="https://picsum.photos/id/1069/1920/1080"></div>
+                <div class="bg-cover bg-center h-24 rounded-lg cursor-pointer hover:ring-2 hover:ring-love-400 transition-all-300" 
+                     data-bg="https://picsum.photos/id/1082/1920/1080"></div>
+                <div class="bg-cover bg-center h-24 rounded-lg cursor-pointer hover:ring-2 hover:ring-love-400 transition-all-300" 
+                     data-bg="https://picsum.photos/id/1084/1920/1080"></div>
+                <div class="bg-cover bg-center h-24 rounded-lg cursor-pointer hover:ring-2 hover:ring-love-400 transition-all-300" 
+                     data-bg="https://picsum.photos/id/110/1920/1080"></div>
+                <div class="bg-cover bg-center h-24 rounded-lg cursor-pointer hover:ring-2 hover:ring-love-400 transition-all-300" 
+                     data-bg="https://picsum.photos/id/117/1920/1080"></div>
+                <div class="bg-cover bg-center h-24 rounded-lg cursor-pointer hover:ring-2 hover:ring-love-400 transition-all-300" 
+                     data-bg="https://picsum.photos/id/133/1920/1080"></div>
+            </div>
+        </div>
+
+        <!-- 互动功能 -->
+        <div class="bg-white bg-opacity-20 bg-blur rounded-2xl p-6 backdrop-filter backdrop-blur-lg border border-white border-opacity-30 shadow-xl animate-[fadeIn_2.4s_ease-out]">
+            <h2 class="text-2xl font-romantic font-bold text-white text-shadow mb-6">互动功能</h2>
+            <div class="flex flex-wrap justify-center gap-4">
+                <button id="love-button" class="bg-love-600 hover:bg-love-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transition-all-300 transform hover:scale-105">
+                    <i class="fa fa-heart mr-2"></i> 表达爱意
+                </button>
+                <button id="random-message" class="bg-white bg-opacity-30 hover:bg-opacity-40 text-white font-bold py-3 px-6 rounded-full shadow-lg transition-all-300 transform hover:scale-105">
+                    <i class="fa fa-comment mr-2"></i> 随机情话
+                </button>
+                <button id="save-moment" class="bg-white bg-opacity-30 hover:bg-opacity-40 text-white font-bold py-3 px-6 rounded-full shadow-lg transition-all-300 transform hover:scale-105">
+                    <i class="fa fa-camera mr-2"></i> 保存此刻
+                </button>
+            </div>
+        </div>
+
+        <!-- 底部信息 -->
+        <footer class="mt-12 text-white text-opacity-80 text-sm">
+            <p>© 2026 我们的爱情纪念日 | 在一起的每一天都是最美好的时光</p>
+        </footer>
+    </div>
+
+    <!-- 爱情特效 -->
+    <div id="hearts-container" class="fixed inset-0 z-0 pointer-events-none"></div>
+
+    <!-- 随机情话弹窗 -->
+    <div id="message-modal" class="fixed inset-0 z-50 flex items-center justify-center hidden">
+        <div class="absolute inset-0 bg-black bg-opacity-70" id="modal-backdrop"></div>
+        <div class="relative bg-white rounded-2xl p-8 max-w-md w-full mx-4 shadow-2xl transform transition-all">
+            <h3 class="text-2xl font-romantic font-bold text-love-600 mb-4">💖 情话</h3>
+            <p id="modal-message" class="text-lg text-gray-700 mb-6"></p>
+            <button id="close-modal" class="bg-love-600 hover:bg-love-700 text-white font-bold py-2 px-6 rounded-full shadow transition-all-300 w-full">
+                我知道啦
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // 计算在一起的天数
+        function calculateDays() {
+            const startDate = new Date('2025-06-03');
+            const today = new Date();
+            const timeDiff = today - startDate;
+            const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+            return daysDiff > 0 ? daysDiff : 0;
+        }
+
+        // 计算周数
+        function calculateWeeks() {
+            const days = calculateDays();
+            return Math.floor(days / 7);
+        }
+
+        // 计算月数（近似值）
+        function calculateMonths() {
+            const days = calculateDays();
+            return Math.floor(days / 30.44);
+        }
+
+        // 更新计数器
+        function updateCounters() {
+            const daysElement = document.getElementById('days-counter');
+            const weeksElement = document.getElementById('weeks-counter');
+            const monthsElement = document.getElementById('months-counter');
+            
+            const days = calculateDays();
+            const weeks = calculateWeeks();
+            const months = calculateMonths();
+            
+            // 数字动画效果
+            animateNumber(daysElement, parseInt(daysElement.textContent), days);
+            animateNumber(weeksElement, parseInt(weeksElement.textContent), weeks);
+            animateNumber(monthsElement, parseInt(monthsElement.textContent), months);
+        }
+
+        // 数字动画
+        function animateNumber(element, start, end, duration = 1000) {
+            let startTime = null;
+            const step = (timestamp) => {
+                if (!startTime) startTime = timestamp;
+                const progress = Math.min((timestamp - startTime) / duration, 1);
+                const value = Math.floor(progress * (end - start) + start);
+                element.textContent = value;
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // 初始化背景图片
+        function initBackgrounds() {
+            const bgOptions = document.querySelectorAll('[data-bg]');
+            bgOptions.forEach(option => {
+                option.style.backgroundImage = `url(${option.dataset.bg})`;
+                option.addEventListener('click', function() {
+                    const bgImage = document.getElementById('background-image');
+                    bgImage.src = this.dataset.bg;
+                });
+            });
+            
+            // 自定义背景图片上传
+            const customBgInput = document.getElementById('custom-bg');
+            customBgInput.addEventListener('change', function(e) {
+                if (e.target.files && e.target.files[0]) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const bgImage = document.getElementById('background-image');
+                        bgImage.src = e.target.result;
+                    }
+                    reader.readAsDataURL(e.target.files[0]);
+                }
+            });
+        }
+
+        // 创建爱心特效
+        function createHeart() {
+            const heartsContainer = document.getElementById('hearts-container');
+            const heart = document.createElement('div');
+            heart.className = 'absolute text-love-400 opacity-70 animate-[floatUp_3s_ease-out_forwards]';
+            heart.innerHTML = '💖';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.top = '100%';
+            heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+            heart.style.animationDelay = Math.random() * 2 + 's';
+            heartsContainer.appendChild(heart);
+            
+            // 3秒后移除
+            setTimeout(() => {
+                heart.remove();
+            }, 3000);
+        }
+
+        // 表达爱意按钮
+        document.getElementById('love-button').addEventListener('click', function() {
+            // 创建多个爱心
+            for (let i = 0; i < 15; i++) {
+                setTimeout(createHeart, i * 100);
+            }
+        });
+
+        // 随机情话
+        const loveMessages = [
+            "你是我每天醒来的理由，也是我每晚入睡前的思念。",
+            "和你在一起的每一刻，都是我生命中最美好的时光。",
+            "你的笑容是我见过的最美丽的风景。",
+            "无论发生什么，我都会一直陪在你身边，直到永远。",
+            "我爱你，不是因为你是谁，而是因为和你在一起时我是谁。",
+            "你是我生命中最珍贵的礼物，我会用一生去珍惜。",
+            "每一次想起你，我的心都会跳动得更加有力。",
+            "和你在一起，即使是平凡的日子也变得不平凡。",
+            "你是我的阳光，我的雨露，我的一切。",
+            "我愿意用我的全部，换取和你在一起的每一个瞬间。"
+        ];
+
+        document.getElementById('random-message').addEventListener('click', function() {
+            const modal = document.getElementById('message-modal');
+            const messageElement = document.getElementById('modal-message');
+            const randomIndex = Math.floor(Math.random() * loveMessages.length);
+            messageElement.textContent = loveMessages[randomIndex];
+            modal.classList.remove('hidden');
+        });
+
+        // 关闭弹窗
+        document.getElementById('close-modal').addEventListener('click', function() {
+            document.getElementById('message-modal').classList.add('hidden');
+        });
+
+        document.getElementById('modal-backdrop').addEventListener('click', function() {
+            document.getElementById('message-modal').classList.add('hidden');
+        });
+
+        // 保存此刻
+        document.getElementById('save-moment').addEventListener('click', function() {
+            alert('这一刻已保存到我们的记忆中 💖');
+        });
+
+        // 初始化
+        function init() {
+            updateCounters();
+            initBackgrounds();
+            
+            // 每小时更新一次计数器
+            setInterval(updateCounters, 3600000);
+            
+            // 添加CSS动画
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes fadeIn {
+                    from { opacity: 0; }
+                    to { opacity: 1; }
+                }
+                @keyframes fadeInDown {
+                    from { opacity: 0; transform: translateY(-30px); }
+                    to { opacity: 1; transform: translateY(0); }
+                }
+                @keyframes fadeInUp {
+                    from { opacity: 0; transform: translateY(30px); }
+                    to { opacity: 1; transform: translateY(0); }
+                }
+                @keyframes floatUp {
+                    0% { transform: translateY(0) rotate(0deg); opacity: 0.7; }
+                    100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        // 页面加载完成后初始化
+        window.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
